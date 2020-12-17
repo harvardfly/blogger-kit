@@ -1,0 +1,23 @@
+server:
+  port: 10086
+
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  db: "user"
+  username: "root"
+  password: "123456"
+
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  db: 0
+  password: ""
+
+log:
+  filename: /tmp/forum.log
+  maxSize: 500
+  maxBackups: 3
+  maxAge: 3
+  level: "debug"
+  stdout: true
