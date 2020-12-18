@@ -1,6 +1,8 @@
 # blogger-kit
 基于go-kit的微服务架构脚手架
 
+## 项目结构
+```markdown
 blogger-kit #项目根路径
 ├── deploy #Dockerfile等
 ├── docs #整体文档
@@ -24,3 +26,4 @@ blogger-kit #项目根路径
 │   │   ├── response #响应struct
 |   |   ├── utils #项目公共工具方法
 └── vendor #go mod require
+```
