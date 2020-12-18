@@ -1,5 +1,5 @@
 server:
-  port: 10086
+  port: 10087
 
 mysql:
   host: "127.0.0.1"
@@ -16,9 +16,8 @@ redis:
   password: ""
 
 log:
-  filename: /tmp/user.log
+  filename: /tmp/article.log
   maxSize: 500
   maxBackups: 3
   maxAge: 3
   level: "debug"
-  stdout: true

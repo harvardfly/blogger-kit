@@ -27,6 +27,7 @@ type MySQLConfig struct {
 	Password string `json:"password" yaml:"password"`
 	Port     string `json:"port" yaml:"port"`
 	DB       string `json:"db" yaml:"db"`
+	Debug    bool   `json:"debug" yaml:"debug"`
 }
 
 // RedisConfig redis配置

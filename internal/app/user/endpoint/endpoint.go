@@ -19,8 +19,8 @@ type UserEndpoints struct {
 func MakeLoginEndpoint(userService service.UserService) endpoint.Endpoint {
 	return func(ctx context.Context, req interface{}) (res interface{}, err error) {
 		logReq := req.(*requests.LoginRequest)
-		userInfo, err := userService.Login(ctx, logReq.Email, logReq.Password)
-		return &responses.LoginResponse{UserInfo: userInfo}, err
+		loginInfo, err := userService.Login(ctx, logReq.Email, logReq.Password)
+		return loginInfo, err
 	}
 }
 

@@ -3,35 +3,32 @@ package transport
 import (
 	"blogger-kit/internal/app/user/endpoint"
 	"blogger-kit/internal/app/user/utils"
-	"blogger-kit/internal/pkg/log"
+	httpware "blogger-kit/internal/pkg/middlewares/http"
+	"blogger-kit/internal/pkg/utils/httputil"
 	"context"
 	"net/http"
 
-	"go.uber.org/zap"
-
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/gorilla/mux"
+	"go.uber.org/zap"
 )
 
 // NewHttpHandler http handler use mux
 func NewHttpHandler(ctx context.Context, endpoints *endpoint.UserEndpoints, logger *zap.Logger) http.Handler {
 	r := mux.NewRouter()
-	options := []kithttp.ServerOption{
-		kithttp.ServerErrorHandler(log.NewZapLogErrorHandler(logger)),
-		kithttp.ServerErrorEncoder(utils.EncodeError),
-	}
-
+	options := httputil.ServerOptions(logger)
+	r.Use(httpware.AccessControl)
 	r.Methods("POST").Path("/register").Handler(kithttp.NewServer(
 		endpoints.RegisterEndpoint,
 		utils.DecodeRegisterRequest,
-		utils.EncodeJSONResponse,
+		httputil.EncodeJSONResponse,
 		options...,
 	))
 
 	r.Methods("POST").Path("/login").Handler(kithttp.NewServer(
 		endpoints.LoginEndpoint,
 		utils.DecodeLoginRequest,
-		utils.EncodeJSONResponse,
+		httputil.EncodeJSONResponse,
 		options...,
 	))
 

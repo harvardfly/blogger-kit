@@ -7,31 +7,36 @@ import (
 	"go.uber.org/zap"
 )
 
-type UserDAO interface {
+// UserDao dao数据层方法
+type UserDao interface {
 	SelectByEmail(email string) (*models.User, error)
 	Save(user *models.User) error
 }
 
-type UserDAOImpl struct {
+// UserDaoImpl 默认实现
+type UserDaoImpl struct {
 	logger *zap.Logger
 }
 
-// NewUserDAOImpl 初始化
-func NewUserDAOImpl(logger *zap.Logger) UserDAO {
-	return &UserDAOImpl{
+// NewUserDaoImpl 初始化
+func NewUserDaoImpl(logger *zap.Logger) UserDao {
+	return &UserDaoImpl{
 		logger: logger.With(zap.String("type", "NewUserDAOImpl")),
 	}
 }
 
 // SelectByEmail 查询邮箱
-func (d *UserDAOImpl) SelectByEmail(email string) (*models.User, error) {
+func (d *UserDaoImpl) SelectByEmail(email string) (*models.User, error) {
 	user := &models.User{}
 	err := databases.DB.Where("email = ?", email).First(user).Error
 	d.logger.Info(user.Username, zap.String("username", user.Username))
+	if err != nil {
+		return nil, err
+	}
 	return user, err
 }
 
 // Save 创建用户
-func (d *UserDAOImpl) Save(user *models.User) error {
+func (d *UserDaoImpl) Save(user *models.User) error {
 	return databases.DB.Create(user).Error
 }

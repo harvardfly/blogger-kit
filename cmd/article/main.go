@@ -1,10 +1,10 @@
 package main
 
 import (
-	"blogger-kit/internal/app/user/dao"
-	"blogger-kit/internal/app/user/endpoint"
-	"blogger-kit/internal/app/user/service"
-	"blogger-kit/internal/app/user/transport"
+	"blogger-kit/internal/app/article/dao"
+	"blogger-kit/internal/app/article/endpoint"
+	"blogger-kit/internal/app/article/service"
+	"blogger-kit/internal/app/article/transport"
 	"blogger-kit/internal/pkg/config"
 	"blogger-kit/internal/pkg/databases"
 	zaplog "blogger-kit/internal/pkg/log"
@@ -15,7 +15,7 @@ import (
 	"log"
 )
 
-var configFile = flag.String("f", "user.yaml", "set config file which will loading.")
+var configFile = flag.String("f", "article.yaml", "set config file which will loading.")
 
 func main() {
 	flag.Parse()
@@ -42,14 +42,14 @@ func main() {
 		log.Println("加载redis配置失败")
 	}
 	ctx := context.Background()
-	userDao := dao.NewUserDaoImpl(logger)
-	userService := service.NewUserServiceImpl(userDao, logger)
-	userEndpoints := &endpoint.UserEndpoints{
-		RegisterEndpoint: endpoint.MakeRegisterEndpoint(userService),
-		LoginEndpoint:    endpoint.MakeLoginEndpoint(userService),
+	articleDao := dao.NewArticleDaoImpl(logger)
+	articleService := service.NewArticleServiceImpl(articleDao, logger)
+	articleEndpoints := &endpoint.ArticleEndpoints{
+		ArticleEndpoint:    endpoint.MakeArticleEndpoint(articleService),
+		GetArticleEndpoint: endpoint.MakeGetArticleEndpoint(articleService),
 	}
 
 	// 初始化Server
-	r := transport.NewHttpHandler(ctx, userEndpoints, logger)
+	r := transport.NewHttpHandler(ctx, articleEndpoints, logger)
 	server.InitServer(config.Conf.ServerConfig, r)
 }

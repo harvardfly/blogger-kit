@@ -2,8 +2,6 @@ package log
 
 import (
 	"blogger-kit/internal/pkg/config"
-	"context"
-	"fmt"
 	"os"
 
 	"github.com/natefinch/lumberjack"
@@ -13,16 +11,6 @@ import (
 
 type ErrorHandler struct {
 	logger *zap.Logger
-}
-
-func NewZapLogErrorHandler(logger *zap.Logger) *ErrorHandler {
-	return &ErrorHandler{
-		logger: logger,
-	}
-}
-
-func (h *ErrorHandler) Handle(ctx context.Context, err error) {
-	h.logger.Warn(fmt.Sprint("response: ", zap.Error(err)))
 }
 
 // InitLog 初始化 log
