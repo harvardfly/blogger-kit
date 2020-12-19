@@ -4,8 +4,11 @@
 ## 项目结构
 ```markdown
 blogger-kit #项目根路径
+├── cmd #服务启动main文件
 ├── deploy #Dockerfile等
 ├── docs #整体文档
+├── conf #配置文件
+├── protos #rpc protobuf文件
 ├── internal #项目模块
 │   ├── app # 具体的服务应用
 │   │   ├── user #用户服务示例
@@ -26,4 +29,16 @@ blogger-kit #项目根路径
 │   │   ├── response #响应struct
 |   |   ├── utils #项目公共工具方法
 └── vendor #go mod require
+```
+
+## 集成组件
+```markdown
+目前已集成：
+config配置文件
+MySQL数据库
+redis缓存
+http/grpc传输
+zap日志库
+jwt认证中间件
+etcd服务注册发现
 ```

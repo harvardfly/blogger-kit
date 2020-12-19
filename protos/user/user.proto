@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package bloguser;
+
+//protoc --go_out=plugins=grpc:. user.proto
+
+// FindByEmailRequest 通过Email获取用户信息
+message FindByEmailRequest {
+  string email = 1;
+}
+
+// FindByIDRequest 方法请求结构体
+message FindByIDRequest {
+  int32 id = 1;
+}
+
+// UserResponse 方法返回结构体
+message UserResponse {
+  int32 id = 1;
+  string username = 2;
+  string email = 3;
+}
+
+// User RPC服务
+service User {
+  rpc FindByEmail (FindByEmailRequest) returns (UserResponse) {
+  }
+
+  rpc FindById (FindByIDRequest) returns (UserResponse) {
+  }
+}

@@ -11,14 +11,16 @@ import (
 
 // UserEndpoints 用户模块Endpoints
 type UserEndpoints struct {
-	RegisterEndpoint endpoint.Endpoint
-	LoginEndpoint    endpoint.Endpoint
+	RegisterEndpoint    endpoint.Endpoint
+	LoginEndpoint       endpoint.Endpoint
+	FindByIDEndpoint    endpoint.Endpoint
+	FindByEmailEndpoint endpoint.Endpoint
 }
 
 // MakeLoginEndpoint 登录Endpoint
 func MakeLoginEndpoint(userService service.UserService) endpoint.Endpoint {
-	return func(ctx context.Context, req interface{}) (res interface{}, err error) {
-		logReq := req.(*requests.LoginRequest)
+	return func(ctx context.Context, request interface{}) (res interface{}, err error) {
+		logReq := request.(*requests.LoginRequest)
 		loginInfo, err := userService.Login(ctx, logReq.Email, logReq.Password)
 		return loginInfo, err
 	}
@@ -26,8 +28,8 @@ func MakeLoginEndpoint(userService service.UserService) endpoint.Endpoint {
 
 // MakeRegisterEndpoint 注册用户Endpoint
 func MakeRegisterEndpoint(userService service.UserService) endpoint.Endpoint {
-	return func(ctx context.Context, req interface{}) (res interface{}, err error) {
-		regReq := req.(*requests.RegisterRequest)
+	return func(ctx context.Context, request interface{}) (res interface{}, err error) {
+		regReq := request.(*requests.RegisterRequest)
 		userInfo, err := userService.Register(ctx, &responses.RegisterUser{
 			Username: regReq.Username,
 			Password: regReq.Password,
@@ -37,5 +39,26 @@ func MakeRegisterEndpoint(userService service.UserService) endpoint.Endpoint {
 			return nil, err
 		}
 		return &responses.RegisterResponse{UserInfo: userInfo}, nil
+	}
+}
+
+// MakeFindByIDEndpoint ID获取用户信息Endpoint
+func MakeFindByIDEndpoint(userService service.UserService) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (res interface{}, err error) {
+		req := request.(*requests.FindByIDRequest)
+		loginInfo, err := userService.FindByID(ctx, req)
+		return loginInfo, err
+	}
+}
+
+// MakeFindByEmailEndpoint 邮箱获取用户信息Endpoint
+func MakeFindByEmailEndpoint(userService service.UserService) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (res interface{}, err error) {
+		req := request.(*requests.FindByEmailRequest)
+		userInfo, err := userService.FindByEmail(ctx, req)
+		if err != nil {
+			return nil, err
+		}
+		return userInfo, nil
 	}
 }

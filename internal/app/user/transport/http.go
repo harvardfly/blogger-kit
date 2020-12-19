@@ -32,5 +32,12 @@ func NewHttpHandler(ctx context.Context, endpoints *endpoint.UserEndpoints, logg
 		options...,
 	))
 
+	r.Methods("GET").Path("/findByID").Handler(kithttp.NewServer(
+		endpoints.FindByIDEndpoint,
+		utils.DecodeFindByIDRequest,
+		httputil.EncodeJSONResponse,
+		options...,
+	))
+
 	return r
 }

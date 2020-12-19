@@ -10,3 +10,11 @@ type RegisterRequest struct {
 	Email    string
 	Password string
 }
+
+type FindByIDRequest struct {
+	ID int
+}
+
+type FindByEmailRequest struct {
+	Email string
+}

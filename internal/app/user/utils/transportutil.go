@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 var (
@@ -54,5 +55,16 @@ func DecodeLoginRequest(_ context.Context, r *http.Request) (interface{}, error)
 	return &requests.LoginRequest{
 		Email:    reg.Email,
 		Password: reg.Password,
+	}, nil
+}
+
+func DecodeFindByIDRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	id := r.URL.Query().Get("id")
+	if id == "" {
+		return nil, ErrorBadRequest
+	}
+	idInt, _ := strconv.Atoi(id)
+	return &requests.FindByIDRequest{
+		ID: idInt,
 	}, nil
 }

@@ -9,6 +9,7 @@ require (
 	github.com/go-kit/kit v0.10.0
 	github.com/go-redsync/redsync v1.4.2
 	github.com/go-sql-driver/mysql v1.5.0
+	github.com/golang/protobuf v1.4.3
 	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/gorilla/mux v1.8.0
 	github.com/hashicorp/consul/api v1.8.1
@@ -20,4 +21,5 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.8.0 // indirect
 	go.uber.org/zap v1.13.0
+	google.golang.org/grpc v1.30.0
 )

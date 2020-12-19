@@ -3,8 +3,10 @@ package service
 import (
 	"blogger-kit/internal/app/user/dao"
 	"blogger-kit/internal/pkg/models"
+	"blogger-kit/internal/pkg/requests"
 	"blogger-kit/internal/pkg/responses"
 	"blogger-kit/internal/pkg/utils/middlewareutil"
+	pb "blogger-kit/protos/user"
 	"context"
 	"errors"
 	"time"
@@ -26,19 +28,25 @@ type UserService interface {
 	Login(ctx context.Context, email, password string) (*responses.LoginResponse, error)
 	// Register 注册接口
 	Register(ctx context.Context, vo *responses.RegisterUser) (*responses.UserInfo, error)
+	// FindByID 调用rpc通过ID查询用户信息
+	FindByID(ctx context.Context, req *requests.FindByIDRequest) (*responses.UserInfo, error)
+	// FindByEmail 调用rpc通过Email查询用户信息
+	FindByEmail(ctx context.Context, req *requests.FindByEmailRequest) (*responses.UserInfo, error)
 }
 
 // UserServiceImpl 初始默认的
 type UserServiceImpl struct {
-	userDao dao.UserDao
-	logger  *zap.Logger
+	userDao    dao.UserDao
+	logger     *zap.Logger
+	userClient pb.UserClient
 }
 
 // NewUserServiceImpl 初始化
-func NewUserServiceImpl(userDao dao.UserDao, logger *zap.Logger) UserService {
+func NewUserServiceImpl(userDao dao.UserDao, logger *zap.Logger, userClient pb.UserClient) UserService {
 	return &UserServiceImpl{
-		userDao: userDao,
-		logger:  logger.With(zap.String("type", "NewUserServiceImpl")),
+		userDao:    userDao,
+		logger:     logger.With(zap.String("type", "NewUserServiceImpl")),
+		userClient: userClient,
 	}
 }
 
@@ -91,4 +99,43 @@ func (s UserServiceImpl) Register(ctx context.Context, vo *responses.RegisterUse
 	}
 
 	return nil, err
+}
+
+// FindByID 调用rpc服务通过ID获取用户信息
+func (s *UserServiceImpl) FindByID(ctx context.Context, req *requests.FindByIDRequest) (*responses.UserInfo, error) {
+	rpcReq := pb.FindByIDRequest{
+		Id: int32(req.ID),
+	}
+
+	data, err := s.userClient.FindById(ctx, &rpcReq)
+	if err != nil {
+		s.logger.Error("通过用户ID获取用户调用失败", zap.Error(err))
+		return nil, err
+	}
+	res := &responses.UserInfo{
+		ID:       int(data.Id),
+		Username: data.Username,
+		Email:    data.Email,
+	}
+
+	return res, nil
+}
+
+// FindByEmail 调用rpc服务通过Email获取用户信息
+func (s *UserServiceImpl) FindByEmail(ctx context.Context, req *requests.FindByEmailRequest) (*responses.UserInfo, error) {
+	var res *responses.UserInfo
+	rpcReq := pb.FindByEmailRequest{
+		Email: req.Email,
+	}
+	data, err := s.userClient.FindByEmail(ctx, &rpcReq)
+	if err != nil {
+		s.logger.Error("通过Email获取用户调用失败", zap.Error(err))
+
+	}
+	res = &responses.UserInfo{
+		ID:       int(data.Id),
+		Username: data.Username,
+		Email:    data.Email,
+	}
+	return res, nil
 }
