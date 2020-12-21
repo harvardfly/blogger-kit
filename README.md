@@ -5,9 +5,9 @@
 ```markdown
 blogger-kit #项目根路径
 ├── cmd #服务启动main文件
+├── conf #配置文件
 ├── deploy #Dockerfile等
 ├── docs #整体文档
-├── conf #配置文件
 ├── protos #rpc protobuf文件
 ├── internal #项目模块
 │   ├── app # 具体的服务应用
