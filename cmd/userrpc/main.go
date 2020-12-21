@@ -8,17 +8,24 @@ import (
 	"blogger-kit/internal/pkg/config"
 	"blogger-kit/internal/pkg/databases"
 	zaplog "blogger-kit/internal/pkg/log"
+	"blogger-kit/internal/pkg/registers"
+	pb "blogger-kit/protos/user"
 	"context"
 	"flag"
+	"fmt"
 	"log"
 	"net"
+	"os"
+	"os/signal"
+	"syscall"
 
-	pb "blogger-kit/protos/user"
-
+	kitlog "github.com/go-kit/kit/log"
+	"go.uber.org/zap"
 	"google.golang.org/grpc"
 )
 
 var configFile = flag.String("f", "userrpc.yaml", "set config file which will loading.")
+var quitChan = make(chan error, 1)
 
 func main() {
 	flag.Parse()
@@ -40,18 +47,44 @@ func main() {
 	}
 
 	ctx := context.Background()
+	registrar, err := registers.InitRegister(
+		ctx, kitlog.NewNopLogger(), config.Conf.EtcdConfig,
+	)
+
 	userDao := dao.NewUserDaoImpl(logger)
 	userService := service.NewUserRPCServiceImpl(userDao, logger)
 	userEndpoints := endpoint.UserRPCEndpoints{
 		FindByIDEndpoint:    endpoint.MakeFindByIDEndpoint(userService),
 		FindByEmailEndpoint: endpoint.MakeFindByEmailEndpoint(userService),
 	}
+	//将服务地址注册到etcd中
+	go func() {
+		registrar.Register()
+		// 使用 transport 构造 UserService
+		handler := transport.NewUserServer(ctx, userEndpoints)
+		// 监听端口，建立 gRPC 网络服务器，注册 RPC 服务
+		ls, err := net.Listen("tcp", config.Conf.EtcdConfig.GrpcAddr)
+		if err != nil {
+			logger.Error("listen tcp err", zap.Error(err))
+			quitChan <- err
+			return
+		}
+		gRPCServer := grpc.NewServer()
+		pb.RegisterUserServer(gRPCServer, handler)
+		err = gRPCServer.Serve(ls)
+		if err != nil {
+			logger.Error("gRPCServer Serve err", zap.Error(err))
+			quitChan <- err
+			return
+		}
+	}()
 
-	// 使用 transport 构造 UserService
-	handler := transport.NewUserServer(ctx, userEndpoints)
-	// 监听端口，建立 gRPC 网络服务器，注册 RPC 服务
-	ls, _ := net.Listen("tcp", "127.0.0.1:8080")
-	gRPCServer := grpc.NewServer()
-	pb.RegisterUserServer(gRPCServer, handler)
-	gRPCServer.Serve(ls)
+	go func() {
+		c := make(chan os.Signal, 1)
+		signal.Notify(c, syscall.SIGTERM, syscall.SIGINT, syscall.SIGKILL, syscall.SIGHUP, syscall.SIGQUIT)
+		quitChan <- fmt.Errorf("%s", <-c)
+	}()
+	err = <-quitChan
+	registrar.Deregister()
+	logger.Error("quit err", zap.Error(err))
 }

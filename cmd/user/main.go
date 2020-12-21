@@ -9,11 +9,14 @@ import (
 	"blogger-kit/internal/pkg/databases"
 	zaplog "blogger-kit/internal/pkg/log"
 	"blogger-kit/internal/pkg/redis"
+	"blogger-kit/internal/pkg/registers"
 	"blogger-kit/internal/pkg/server"
 	pb "blogger-kit/protos/user"
 	"context"
 	"flag"
 	"log"
+
+	"go.uber.org/zap"
 
 	"google.golang.org/grpc"
 )
@@ -44,16 +47,26 @@ func main() {
 	if err != nil {
 		log.Println("加载redis配置失败")
 	}
-
+	ctx := context.Background()
 	// 初始化rpc客户端
-	serviceAddress := "127.0.0.1:8080"
-	conn, err := grpc.Dial(serviceAddress, grpc.WithInsecure())
+	//instance, err := registers.ClientInstance(
+	//	ctx,
+	//	kitlog.NewNopLogger(),
+	//	config.Conf.EtcdConfig,
+	//)
+	entrie, err := registers.GetEntrie(
+		ctx,
+		logger,
+		config.Conf.EtcdConfig,
+	)
+	conn, err := grpc.Dial(entrie, grpc.WithInsecure())
 	if err != nil {
-		panic("connect error")
+		logger.Error("连接user rpc 错误", zap.Error(err))
+		panic("grpc connect error")
 	}
 	defer conn.Close()
 	userClient := pb.NewUserClient(conn)
-	ctx := context.Background()
+
 	userDao := dao.NewUserDaoImpl(logger)
 	userService := service.NewUserServiceImpl(userDao, logger, userClient)
 	userEndpoints := &endpoint.UserEndpoints{

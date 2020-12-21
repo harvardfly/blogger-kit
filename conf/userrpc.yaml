@@ -1,6 +1,3 @@
-server:
-  port: 10086
-
 mysql:
   host: "127.0.0.1"
   port: 3306
@@ -22,3 +19,9 @@ log:
   maxAge: 3
   level: "debug"
   stdout: true
+
+etcd:
+  etcdAddr: etcd1.sndu.cn:2379,etcd2.sndu.cn:2379
+  serName: zpf.srv.kit.userrpc
+  grpcAddr: 127.0.0.1:8080
+  ttl: 5
