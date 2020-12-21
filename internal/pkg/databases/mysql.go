@@ -6,13 +6,16 @@ import (
 	"log"
 	"time"
 
+	// mysql driver
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
 )
 
+// DB 定义gorm初始变量
 var DB *gorm.DB
 
+// InitMysql 初始化mysql连接
 func InitMysql(cfg *config.MySQLConfig) (err error) {
 	// 连接MySQL驱动
 	DB, err = gorm.Open(

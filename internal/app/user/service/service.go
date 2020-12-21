@@ -16,10 +16,14 @@ import (
 )
 
 var (
+	// ErrUserExisted 用户已存在
 	ErrUserExisted = errors.New("user is existed")
-	ErrPassword    = errors.New("email and password are not match")
+	// ErrPassword 邮箱与密码不匹配
+	ErrPassword = errors.New("email and password are not match")
+	// ErrRegistering 邮箱已存在
 	ErrRegistering = errors.New("email is registering")
-	AccessTokenErr = errors.New("生成签名错误")
+	// ErrAccessToken token验证失败
+	ErrAccessToken = errors.New("生成签名错误")
 )
 
 // UserService 用户服务
@@ -61,7 +65,7 @@ func (s *UserServiceImpl) Login(ctx context.Context, email, password string) (*r
 	if user.Password == password {
 		accessToken, err := middlewareutil.CreateAccessToken(user.Username, expired)
 		if err != nil {
-			return nil, AccessTokenErr
+			return nil, ErrAccessToken
 		}
 		return &responses.LoginResponse{
 			AccessToken: accessToken,

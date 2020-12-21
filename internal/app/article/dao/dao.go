@@ -18,7 +18,7 @@ import (
 
 // ArticleDao dao数据层方法 crud
 type ArticleDao interface {
-	Article(req *requests.Article, ctx context.Context) (models.Article, error)
+	Article(ctx context.Context, req *requests.Article) (models.Article, error)
 	GetArticle(id int) models.Article
 	ArticleEdit(article *models.Article) error
 	ArticleDel(id int) error
@@ -66,7 +66,7 @@ func (r *ArticleDaoImpl) GetCategory(id int) models.Category {
 }
 
 // Article 发布文章
-func (r *ArticleDaoImpl) Article(req *requests.Article, ctx context.Context) (models.Article, error) {
+func (r *ArticleDaoImpl) Article(ctx context.Context, req *requests.Article) (models.Article, error) {
 	var category models.Category
 	value := models.Article{
 		Title:      req.Title,

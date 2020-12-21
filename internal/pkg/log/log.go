@@ -9,6 +9,7 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
+// ErrorHandler 定义handler异常struct
 type ErrorHandler struct {
 	logger *zap.Logger
 }

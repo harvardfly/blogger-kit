@@ -1,5 +1,6 @@
 package models
 
+// User 用户model
 type User struct {
 	BaseModel
 	Username string
@@ -7,6 +8,7 @@ type User struct {
 	Email    string
 }
 
+// TableName 获取表名
 func (User) TableName() string {
 	return "user"
 }

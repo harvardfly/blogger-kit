@@ -50,6 +50,6 @@ func main() {
 	}
 
 	// 初始化Server
-	r := transport.NewHttpHandler(ctx, articleEndpoints, logger)
+	r := transport.NewHTTPHandler(ctx, articleEndpoints, logger)
 	server.InitServer(config.Conf.ServerConfig, r)
 }

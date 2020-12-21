@@ -13,8 +13,8 @@ import (
 	"go.uber.org/zap"
 )
 
-// NewHttpHandler http handler use mux
-func NewHttpHandler(ctx context.Context, endpoints *endpoint.UserEndpoints, logger *zap.Logger) http.Handler {
+// NewHTTPHandler http handler use mux
+func NewHTTPHandler(ctx context.Context, endpoints *endpoint.UserEndpoints, logger *zap.Logger) http.Handler {
 	r := mux.NewRouter()
 	options := httputil.ServerOptions(logger)
 	r.Use(httpware.AccessControl)

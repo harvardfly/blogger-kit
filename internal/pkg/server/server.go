@@ -10,6 +10,7 @@ import (
 	"syscall"
 )
 
+// InitServer 初始化http server
 func InitServer(cfg *config.ServerConfig, r http.Handler) (err error) {
 	errChan := make(chan error)
 	go func() {

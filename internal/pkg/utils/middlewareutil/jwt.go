@@ -8,6 +8,7 @@ import (
 const (
 	// UserSignedKey 定义UserSignedKey
 	UserSignedKey = "blogger_kit_"
+	// JWTConTextKey 定义jwt key
 	JWTConTextKey = "jwt_context_key"
 )
 

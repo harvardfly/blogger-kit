@@ -40,6 +40,7 @@ type RedisConfig struct {
 	DB       int    `json:"db" yaml:"db"`
 }
 
+// LogConfig 日志配置
 type LogConfig struct {
 	Filename   string
 	MaxSize    int
@@ -54,10 +55,10 @@ type EtcdConfig struct {
 	EtcdAddr string        `json:"etcdAddr" yaml:"etcdAddr"`
 	SerName  string        `json:"serName" yaml:"serName"`
 	GrpcAddr string        `json:"grpcAddr" yaml:"grpcAddr"`
-	Ttl      time.Duration `json:"ttl" yaml:"ttl"`
+	TTL      time.Duration `json:"ttl" yaml:"ttl"`
 }
 
-// 定义了全局的配置文件实例
+// Conf 定义了全局的配置文件实例
 var Conf = new(AppConfig)
 
 // Init 初始化

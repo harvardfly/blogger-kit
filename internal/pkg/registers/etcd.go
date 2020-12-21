@@ -44,8 +44,8 @@ func ClientInstance(ctx context.Context, logger log.Logger, cfg *config.EtcdConf
 func connectEtcd(ctx context.Context, cfg *config.EtcdConfig) etcdv3.Client {
 	//etcd的连接参数
 	options := etcdv3.ClientOptions{
-		DialTimeout:   time.Second * cfg.Ttl,
-		DialKeepAlive: time.Second * cfg.Ttl,
+		DialTimeout:   time.Second * cfg.TTL,
+		DialKeepAlive: time.Second * cfg.TTL,
 	}
 	//创建etcd连接
 	etcdServers := strings.Split(cfg.EtcdAddr, ",")

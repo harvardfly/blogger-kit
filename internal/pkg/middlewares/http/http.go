@@ -2,6 +2,7 @@ package http
 
 import "net/http"
 
+// AccessControl 防止跨域
 func AccessControl(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")

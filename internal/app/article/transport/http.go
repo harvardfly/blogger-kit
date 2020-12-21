@@ -15,8 +15,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// NewHttpHandler http handler use mux
-func NewHttpHandler(ctx context.Context, endpoints *endpoint.ArticleEndpoints, logger *zap.Logger) http.Handler {
+// NewHTTPHandler http handler use mux
+func NewHTTPHandler(ctx context.Context, endpoints *endpoint.ArticleEndpoints, logger *zap.Logger) http.Handler {
 	r := mux.NewRouter()
 	options := httputil.ServerOptions(logger)
 	r.Use(httpware.AccessControl)

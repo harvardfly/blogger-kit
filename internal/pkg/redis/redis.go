@@ -12,6 +12,7 @@ import (
 var pool *redis.Pool
 var redisLock *redsync.Redsync
 
+// InitRedis 初始化redis
 func InitRedis(cfg *config.RedisConfig) error {
 	pool = &redis.Pool{
 		MaxIdle:     20,
@@ -42,6 +43,7 @@ func InitRedis(cfg *config.RedisConfig) error {
 	return nil
 }
 
+// GetRedisConn 获取redis连接
 func GetRedisConn() (redis.Conn, error) {
 	conn := pool.Get()
 	return conn, conn.Err()

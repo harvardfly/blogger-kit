@@ -36,7 +36,7 @@ func withID(typeid int32) func(db *gorm.DB) *gorm.DB {
 	}
 }
 
-// FindByToken 数据库实现根据email获取用户信息
+// FindByEmail 数据库实现根据email获取用户信息
 func (r *UserDaoImpl) FindByEmail(email string) (models.User, error) {
 	var res models.User
 	if err := databases.DB.Model(&models.User{}).Where("email=?", email).First(&res).Error; err != nil {

@@ -12,6 +12,7 @@ import (
 	"go.uber.org/zap"
 )
 
+// Error 定义错误返回
 func Error(err error, msg string) interface{} {
 	return struct {
 		Err string `json:"err"`
@@ -22,6 +23,7 @@ func Error(err error, msg string) interface{} {
 	}
 }
 
+// Success 定义成功返回
 func Success(data interface{}) interface{} {
 	return struct {
 		Data interface{} `json:"data"`
@@ -30,7 +32,8 @@ func Success(data interface{}) interface{} {
 	}
 }
 
-func ReturnJson(code int64, message string, data interface{}) interface{} {
+// ReturnJSON 返回json
+func ReturnJSON(code int64, message string, data interface{}) interface{} {
 	return struct {
 		Code    int64       `json:"code"`
 		Message string      `json:"message"`
@@ -42,6 +45,7 @@ func ReturnJson(code int64, message string, data interface{}) interface{} {
 	}
 }
 
+// ServerOptions 初始化http server options
 func ServerOptions(logger *zap.Logger) []kithttp.ServerOption {
 	options := []kithttp.ServerOption{
 		kithttp.ServerErrorEncoder(func(ctx context.Context, err error, w http.ResponseWriter) {
@@ -58,11 +62,13 @@ func ServerOptions(logger *zap.Logger) []kithttp.ServerOption {
 	return options
 }
 
+// EncodeJSONResponse 返回json
 func EncodeJSONResponse(ctx context.Context, w http.ResponseWriter, response interface{}) error {
 	w.Header().Set("Content-Type", "application/json;charset=utf-8")
 	return json.NewEncoder(w).Encode(response)
 }
 
+// EncodeError 错误处理
 func EncodeError(_ context.Context, err error, w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	switch err {

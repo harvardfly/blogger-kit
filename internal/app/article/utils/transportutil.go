@@ -12,9 +12,11 @@ import (
 )
 
 var (
+	// ErrorBadRequest 参数错误异常
 	ErrorBadRequest = errors.New("invalid request parameter")
 )
 
+// DecodeArticleRequest Article请求参数验证
 func DecodeArticleRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -35,6 +37,7 @@ func DecodeArticleRequest(_ context.Context, r *http.Request) (interface{}, erro
 	}, nil
 }
 
+// DecodeArticleInfoRequest ArticleInfo请求参数验证
 func DecodeArticleInfoRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	id := r.URL.Query().Get("id")
 	if id == "" {

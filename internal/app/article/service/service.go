@@ -47,7 +47,7 @@ func (s *ArticleServiceImpl) Article(ctx context.Context, req *requests.Article)
 		return result, gorm.ErrRecordNotFound
 	}
 
-	res, err := s.articleDao.Article(req, ctx)
+	res, err := s.articleDao.Article(ctx, req)
 
 	if err != nil {
 		s.logger.Error("发表文章失败", zap.Error(err))

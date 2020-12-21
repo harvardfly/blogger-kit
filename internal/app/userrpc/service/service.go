@@ -14,7 +14,7 @@ var (
 	ErrNotFound = errors.New("用户不存在")
 )
 
-// UserService 用户服务
+// UserRPCService 用户服务
 type UserRPCService interface {
 	FindByEmail(ctx context.Context, req *userpb.FindByEmailRequest) (*userpb.UserResponse, error)
 	FindByID(ctx context.Context, req *userpb.FindByIDRequest) (*userpb.UserResponse, error)

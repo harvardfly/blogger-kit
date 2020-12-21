@@ -12,9 +12,11 @@ import (
 )
 
 var (
+	// ErrorBadRequest 参数错误
 	ErrorBadRequest = errors.New("invalid request parameter")
 )
 
+// DecodeRegisterRequest 注册请求参数
 func DecodeRegisterRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -38,6 +40,7 @@ func DecodeRegisterRequest(_ context.Context, r *http.Request) (interface{}, err
 	}, nil
 }
 
+// DecodeLoginRequest  登录请求参数
 func DecodeLoginRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -58,6 +61,7 @@ func DecodeLoginRequest(_ context.Context, r *http.Request) (interface{}, error)
 	}, nil
 }
 
+// DecodeFindByIDRequest 通过ID查找用户 请求参数
 func DecodeFindByIDRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	id := r.URL.Query().Get("id")
 	if id == "" {

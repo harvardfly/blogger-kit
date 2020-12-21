@@ -5,6 +5,7 @@ import (
 	"context"
 )
 
+// DecodeFindByEmailRequest  FindByEmail参数验证
 func DecodeFindByEmailRequest(ctx context.Context, request interface{}) (interface{}, error) {
 	req := request.(*userpb.FindByEmailRequest)
 	return &userpb.FindByEmailRequest{
@@ -12,6 +13,7 @@ func DecodeFindByEmailRequest(ctx context.Context, request interface{}) (interfa
 	}, nil
 }
 
+// EncodeFindByEmailResponse  FindByEmail返回值
 func EncodeFindByEmailResponse(_ context.Context, response interface{}) (interface{}, error) {
 	resp := response.(*userpb.UserResponse)
 	return &userpb.UserResponse{
@@ -21,6 +23,7 @@ func EncodeFindByEmailResponse(_ context.Context, response interface{}) (interfa
 	}, nil
 }
 
+// DecodeFindByIDRequest FindByID 参数验证
 func DecodeFindByIDRequest(ctx context.Context, r interface{}) (interface{}, error) {
 	req := r.(*userpb.FindByIDRequest)
 	return &userpb.FindByIDRequest{
@@ -28,6 +31,7 @@ func DecodeFindByIDRequest(ctx context.Context, r interface{}) (interface{}, err
 	}, nil
 }
 
+// EncodeFindByIDResponse FindByID 返回值验证
 func EncodeFindByIDResponse(_ context.Context, response interface{}) (interface{}, error) {
 	resp := response.(*userpb.UserResponse)
 	return &userpb.UserResponse{

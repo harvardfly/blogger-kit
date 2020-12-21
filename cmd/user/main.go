@@ -77,6 +77,6 @@ func main() {
 	}
 
 	// 初始化Server
-	r := transport.NewHttpHandler(ctx, userEndpoints, logger)
+	r := transport.NewHTTPHandler(ctx, userEndpoints, logger)
 	server.InitServer(config.Conf.ServerConfig, r)
 }

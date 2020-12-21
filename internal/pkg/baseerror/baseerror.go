@@ -10,7 +10,7 @@ type (
 		message string
 	}
 
-	// ErrorWrapper
+	// ErrorWrapper 定义错误返回
 	ErrorWrapper struct {
 		Error string `json:"errors"`
 	}
