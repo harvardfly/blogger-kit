@@ -1,4 +1,4 @@
-# kit-scaffold
+# blogger-kit
 基于go-kit的微服务架构脚手架
 
 ## 项目结构
@@ -51,6 +51,6 @@ golang >= 1.13
 
 ## golint 代码规范检查
 ```$xslt
-1. cd kit-scaffold
+1. cd blogger-kit
 2. go list ./... | grep -v /vendor/ | xargs -L1 golint -set_exit_status
 ```
