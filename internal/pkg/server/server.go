@@ -1,20 +1,22 @@
 package server
 
 import (
-	"blogger-kit/internal/pkg/config"
 	"fmt"
-	"net/http"
 	"os"
 	"os/signal"
 	"strconv"
 	"syscall"
+
+	"github.com/gin-gonic/gin"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/config"
 )
 
 // InitServer 初始化http server
-func InitServer(cfg *config.ServerConfig, r http.Handler) (err error) {
+func InitServer(cfg *config.ServerConfig, r *gin.Engine) (err error) {
 	errChan := make(chan error)
 	go func() {
-		errChan <- http.ListenAndServe(":"+strconv.Itoa(cfg.Port), r)
+		errChan <- r.Run(fmt.Sprintf(":%s", strconv.Itoa(cfg.Port)))
 	}()
 
 	go func() {

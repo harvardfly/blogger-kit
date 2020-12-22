@@ -1,8 +1,9 @@
 package requests
 
 import (
-	"blogger-kit/internal/pkg/responses"
 	"time"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/responses"
 )
 
 // Article request 数据结构

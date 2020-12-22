@@ -1,10 +1,11 @@
 package endpoint
 
 import (
-	"blogger-kit/internal/app/user/service"
-	"blogger-kit/internal/pkg/requests"
-	"blogger-kit/internal/pkg/responses"
 	"context"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/user/service"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/requests"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/responses"
 
 	"github.com/go-kit/kit/endpoint"
 )

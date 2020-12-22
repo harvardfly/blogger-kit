@@ -1,15 +1,16 @@
 package service
 
 import (
-	"blogger-kit/internal/app/user/dao"
-	"blogger-kit/internal/pkg/models"
-	"blogger-kit/internal/pkg/requests"
-	"blogger-kit/internal/pkg/responses"
-	"blogger-kit/internal/pkg/utils/middlewareutil"
-	pb "blogger-kit/protos/user"
 	"context"
 	"errors"
 	"time"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/user/dao"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/models"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/requests"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/responses"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/utils/middlewareutil"
+	pb "pkg.zpf.com/golang/kit-scaffold/protos/user"
 
 	"github.com/jinzhu/gorm"
 	"go.uber.org/zap"

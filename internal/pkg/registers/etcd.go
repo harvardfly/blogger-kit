@@ -1,12 +1,13 @@
 package registers
 
 import (
-	"blogger-kit/internal/pkg/config"
 	"context"
 	"fmt"
 	"math/rand"
 	"strings"
 	"time"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/config"
 
 	"go.uber.org/zap"
 
@@ -62,6 +63,9 @@ func GetEntrie(ctx context.Context, logger *zap.Logger, cfg *config.EtcdConfig) 
 	entries, err := client.GetEntries(cfg.SerName)
 	if err != nil {
 		logger.Error("获取etcd中grpc地址失败", zap.Error(err))
+		return "", err
+	}
+	if len(entries) == 0 {
 		return "", err
 	}
 	return entries[rand.Intn(len(entries))], nil

@@ -1,7 +1,26 @@
-FROM golang:1.14:latest
-WORKDIR /src
-COPY / /home/zpf/go/src/blogger-kit
-RUN go env -w GOPROXY=https://goproxy.cn,direct
-RUN go build -o userrpc
-EXPOSE 10086
-ENTRYPOINT ./user -mysql.addr $mysqlAddr
+FROM hub.zpf.com/library/golang:alpine AS builder
+
+ENV GO111MODULE=on
+ENV GOFLAGS="-mod=vendor"
+
+ENV SOURCE=/src
+ADD . ${SOURCE}
+WORKDIR ${SOURCE}
+
+FROM debian:buster
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list \
+    && sed -i 's/security.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+RUN apt-get update && apt-get install -y ca-certificates
+
+ENV SOURCE=/src
+ENV SERVICE=/service
+WORKDIR ${SERVICE}
+
+ARG TARGET_USERRPC
+RUN echo ${TARGET_USERRPC}
+COPY --from=builder ${SOURCE}/${TARGET_USERRPC} .
+COPY --from=builder ${SOURCE}/conf configs
+RUN echo "/${SERVICE}/${TARGET_USERRPC}" > /start.bash; \
+    chmod +x /start.bash
+
+CMD ["/bin/sh", "/start.bash"]

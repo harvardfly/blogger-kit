@@ -1,15 +1,6 @@
 package main
 
 import (
-	"blogger-kit/internal/app/userrpc/dao"
-	"blogger-kit/internal/app/userrpc/endpoint"
-	"blogger-kit/internal/app/userrpc/service"
-	"blogger-kit/internal/app/userrpc/transport"
-	"blogger-kit/internal/pkg/config"
-	"blogger-kit/internal/pkg/databases"
-	zaplog "blogger-kit/internal/pkg/log"
-	"blogger-kit/internal/pkg/registers"
-	pb "blogger-kit/protos/user"
 	"context"
 	"flag"
 	"fmt"
@@ -18,6 +9,16 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/userrpc/dao"
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/userrpc/endpoint"
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/userrpc/service"
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/userrpc/transport"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/config"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/databases"
+	zaplog "pkg.zpf.com/golang/kit-scaffold/internal/pkg/log"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/registers"
+	pb "pkg.zpf.com/golang/kit-scaffold/protos/user"
 
 	kitlog "github.com/go-kit/kit/log"
 	"go.uber.org/zap"

@@ -1,0 +1,69 @@
+version: "3.5"
+
+networks:
+  sync:
+    driver: overlay
+
+configs:
+  kit_userrpc:
+    external:
+      name: kit_web_userrpc_1
+  kit_user:
+    external:
+      name: kit_web_user_1
+
+services:
+  kit-userrpc:
+    environment:
+      MYSQL_DSN: "root:123456@tcp(db:3306)/user?charset=utf8mb4&parseTime=True&loc=Local"
+    restart: always
+    depends_on:
+      - db
+    image: hub.zpf.com/web_kit_scaffold/user:dev
+    ports:
+      - 18001:18080
+    configs:
+      - source: kit_userrpc
+        target: /service/configs/userrpc.yaml
+    networks:
+      - sync
+    command: /service/home -f /service/configs/userrpc.yaml
+
+  kit-user:
+    environment:
+      MYSQL_DSN: "root:123456@tcp(db:3306)/user?charset=utf8mb4&parseTime=True&loc=Local"
+    restart: always
+    depends_on:
+      - db
+      - redis
+    image: hub.zpf.com/web_kit_scaffold/user:dev
+    ports:
+      - 18002:10086
+    configs:
+      - source: kit_user
+        target: /service/configs/user.yaml
+    networks:
+      - sync
+    command: /service/user -f /service/configs/user.yaml
+
+  db:
+    image: hub.zpf.com/mysql/mysql:latest
+    networks:
+      - sync
+    volumes:
+      - "/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: user
+    ports:
+      - 53306:3306
+    restart: always
+
+  redis:
+    image: hub.zpf.com/library/redis:stable
+    volumes:
+      - /var/lib/redis
+    deploy:
+      placement:
+        constraints:
+          - node.labels.name == wh-web-test-1

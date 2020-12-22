@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"blogger-kit/internal/pkg/requests"
 	"context"
 	"encoding/json"
 	"errors"
@@ -9,6 +8,8 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/requests"
 )
 
 var (

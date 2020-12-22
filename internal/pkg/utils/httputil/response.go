@@ -1,16 +1,24 @@
 package httputil
 
 import (
-	"blogger-kit/internal/pkg/baseerror"
-	"blogger-kit/internal/pkg/utils/middlewareutil"
 	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
+
+	ginZap "github.com/gin-contrib/zap"
+	"github.com/gin-gonic/gin"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/baseerror"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/utils/middlewareutil"
 
 	kithttp "github.com/go-kit/kit/transport/http"
 	"go.uber.org/zap"
 )
+
+// InitControllers init controllers
+type InitControllers func(r *gin.Engine)
 
 // Error 定义错误返回
 func Error(err error, msg string) interface{} {
@@ -78,4 +86,18 @@ func EncodeError(_ context.Context, err error, w http.ResponseWriter) {
 	json.NewEncoder(w).Encode(map[string]interface{}{
 		"error": err.Error(),
 	})
+}
+
+func NewRouter(mode string, logger *zap.Logger) *gin.Engine {
+	// 配置gin
+	gin.SetMode(mode)
+	r := gin.New()
+	// panic之后自动恢复
+	r.Use(gin.Recovery())
+	// 日志格式化
+	r.Use(ginZap.Ginzap(logger, time.RFC3339, true))
+	// panic日志格式化
+	r.Use(ginZap.RecoveryWithZap(logger, true))
+
+	return r
 }

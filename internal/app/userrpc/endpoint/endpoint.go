@@ -1,9 +1,10 @@
 package endpoint
 
 import (
-	"blogger-kit/internal/app/userrpc/service"
-	userpb "blogger-kit/protos/user"
 	"context"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/userrpc/service"
+	userpb "pkg.zpf.com/golang/kit-scaffold/protos/user"
 
 	"github.com/go-kit/kit/endpoint"
 )

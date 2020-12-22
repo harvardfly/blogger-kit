@@ -1,8 +1,9 @@
 package log
 
 import (
-	"blogger-kit/internal/pkg/config"
 	"os"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/config"
 
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"

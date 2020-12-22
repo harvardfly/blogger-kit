@@ -5,11 +5,12 @@ token认证中间件
 */
 
 import (
-	"blogger-kit/internal/pkg/baseerror"
-	"blogger-kit/internal/pkg/utils/middlewareutil"
 	"context"
 	"errors"
 	"fmt"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/baseerror"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/utils/middlewareutil"
 
 	"github.com/go-kit/kit/endpoint"
 	"go.uber.org/zap"

@@ -1,9 +1,10 @@
 package redis
 
 import (
-	"blogger-kit/internal/pkg/config"
 	"fmt"
 	"time"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/config"
 
 	"github.com/go-redsync/redsync"
 	"github.com/gomodule/redigo/redis"

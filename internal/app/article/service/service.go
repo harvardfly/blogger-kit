@@ -1,12 +1,13 @@
 package service
 
 import (
-	"blogger-kit/internal/app/article/dao"
-	"blogger-kit/internal/pkg/models"
-	"blogger-kit/internal/pkg/requests"
-	"blogger-kit/internal/pkg/responses"
 	"context"
 	"errors"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/article/dao"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/models"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/requests"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/responses"
 
 	"github.com/jinzhu/gorm"
 	"github.com/opentracing/opentracing-go"

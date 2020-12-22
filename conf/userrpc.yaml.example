@@ -1,0 +1,27 @@
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  db: "user"
+  username: "root"
+  password: "123456"
+  debug: true
+
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  db: 0
+  password: ""
+
+log:
+  filename: /tmp/userrpc.log
+  maxSize: 500
+  maxBackups: 3
+  maxAge: 3
+  level: "debug"
+  stdout: true
+
+etcd:
+  etcdAddr: etcd1.sndu.cn:2379,etcd2.sndu.cn:2379
+  serName: zpf.srv.kit.userrpc
+  grpcAddr: 127.0.0.1:8080
+  ttl: 5

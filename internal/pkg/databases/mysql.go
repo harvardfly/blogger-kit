@@ -1,10 +1,11 @@
 package databases
 
 import (
-	"blogger-kit/internal/pkg/config"
 	"fmt"
 	"log"
 	"time"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/config"
 
 	// mysql driver
 	_ "github.com/go-sql-driver/mysql"

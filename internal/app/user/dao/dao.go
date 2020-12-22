@@ -1,8 +1,8 @@
 package dao
 
 import (
-	"blogger-kit/internal/pkg/databases"
-	"blogger-kit/internal/pkg/models"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/databases"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/models"
 
 	"go.uber.org/zap"
 )

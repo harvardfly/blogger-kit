@@ -19,7 +19,8 @@ type AppConfig struct {
 
 // ServerConfig web server配置
 type ServerConfig struct {
-	Port int `json:"port" yaml:"port"`
+	Port int    `json:"port" yaml:"port"`
+	Mode string `json:"mode" yaml:"mode"`
 }
 
 // MySQLConfig MySQL数据库配置

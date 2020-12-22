@@ -1,9 +1,9 @@
-# blogger-kit
+# kit-scaffold
 基于go-kit的微服务架构脚手架
 
 ## 项目结构
 ```markdown
-blogger-kit #项目根路径
+kit-scaffold #项目根路径
 ├── cmd #服务启动main文件
 ├── conf #配置文件
 ├── deploy #Dockerfile等
@@ -34,6 +34,7 @@ blogger-kit #项目根路径
 ## 集成组件
 ```markdown
 目前已集成：
+gin作为路由
 config配置文件
 MySQL数据库
 redis缓存
@@ -41,4 +42,15 @@ http/grpc传输
 zap日志库
 jwt认证中间件
 etcd服务注册发现
+```
+
+## 系统环境要求
+```$xslt
+golang >= 1.13
+```
+
+## golint 代码规范检查
+```$xslt
+1. cd kit-scaffold
+2. go list ./... | grep -v /vendor/ | xargs -L1 golint -set_exit_status
 ```

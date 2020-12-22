@@ -1,10 +1,11 @@
 package service
 
 import (
-	"blogger-kit/internal/app/userrpc/dao"
-	userpb "blogger-kit/protos/user"
 	"context"
 	"errors"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/userrpc/dao"
+	userpb "pkg.zpf.com/golang/kit-scaffold/protos/user"
 
 	"go.uber.org/zap"
 )

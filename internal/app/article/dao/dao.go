@@ -1,14 +1,15 @@
 package dao
 
 import (
-	"blogger-kit/internal/pkg/databases"
-	"blogger-kit/internal/pkg/models"
-	"blogger-kit/internal/pkg/requests"
-	"blogger-kit/internal/pkg/responses"
 	"context"
 	"errors"
 	"fmt"
 	"time"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/databases"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/models"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/requests"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/responses"
 
 	"github.com/jinzhu/gorm"
 	"github.com/opentracing/opentracing-go"

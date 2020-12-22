@@ -1,10 +1,11 @@
 package transport
 
 import (
-	"blogger-kit/internal/app/userrpc/endpoint"
-	"blogger-kit/internal/app/userrpc/utils"
-	userpb "blogger-kit/protos/user"
 	"context"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/userrpc/endpoint"
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/userrpc/utils"
+	userpb "pkg.zpf.com/golang/kit-scaffold/protos/user"
 
 	kitrpc "github.com/go-kit/kit/transport/grpc"
 )

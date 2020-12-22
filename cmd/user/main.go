@@ -1,20 +1,21 @@
 package main
 
 import (
-	"blogger-kit/internal/app/user/dao"
-	"blogger-kit/internal/app/user/endpoint"
-	"blogger-kit/internal/app/user/service"
-	"blogger-kit/internal/app/user/transport"
-	"blogger-kit/internal/pkg/config"
-	"blogger-kit/internal/pkg/databases"
-	zaplog "blogger-kit/internal/pkg/log"
-	"blogger-kit/internal/pkg/redis"
-	"blogger-kit/internal/pkg/registers"
-	"blogger-kit/internal/pkg/server"
-	pb "blogger-kit/protos/user"
 	"context"
 	"flag"
 	"log"
+
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/user/dao"
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/user/endpoint"
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/user/service"
+	"pkg.zpf.com/golang/kit-scaffold/internal/app/user/transport"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/config"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/databases"
+	zaplog "pkg.zpf.com/golang/kit-scaffold/internal/pkg/log"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/redis"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/registers"
+	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/server"
+	pb "pkg.zpf.com/golang/kit-scaffold/protos/user"
 
 	"go.uber.org/zap"
 
@@ -77,6 +78,10 @@ func main() {
 	}
 
 	// 初始化Server
+	ctx = context.WithValue(ctx, "ginMod", config.Conf.Mode)
 	r := transport.NewHTTPHandler(ctx, userEndpoints, logger)
-	server.InitServer(config.Conf.ServerConfig, r)
+	err = server.InitServer(config.Conf.ServerConfig, r)
+	if err != nil {
+		logger.Error("服务启动错误", zap.Error(err))
+	}
 }
