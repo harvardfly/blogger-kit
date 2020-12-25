@@ -3,7 +3,7 @@
 
 ## 项目结构
 ```markdown
-kit-scaffold #项目根路径
+blogger-kit #项目根路径
 ├── cmd #服务启动main文件
 ├── conf #配置文件
 ├── deploy #Dockerfile等
