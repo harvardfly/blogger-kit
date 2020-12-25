@@ -42,7 +42,7 @@ http/grpc传输
 zap日志库
 jwt认证中间件
 etcd服务注册发现
-docker swam
+docker swarm
 k8s
 ```
 
@@ -52,7 +52,7 @@ golang >= 1.13
 ```
 
 ## 项目部署
-### docker swam方式：
+### docker swarm方式：
 ```markdown
 1. make build 生成二进制文件
 2. make docker 打包镜像并推送到docker hub
@@ -60,7 +60,7 @@ golang >= 1.13
 ```
 ### k8s方式：
 ```markdown
-1、2步同docker swam
+1、2步同docker swarm
 3. 执行batch_deploy.sh启动pod
 执行batch_undeploy.sh可关闭pod
 ```
