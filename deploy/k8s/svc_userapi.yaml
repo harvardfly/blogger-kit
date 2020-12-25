@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service   # Service相当于负载均衡代理
+metadata:
+  name: svc-userapi
+  labels:
+    app: svc-userapi
+spec:
+  ports:
+  - port: 8081
+    protocol: TCP
+    nodePort: 18081
+  selector:
+    app: svc-userapi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: svc-userapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: svc-userapi
+  template:
+    metadata:
+      labels:
+        app: svc-userapi
+    spec:
+      containers:
+        - name: svc-userapi
+          image: hub.zpf.com/web_kit_scaffold/user:dev
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 8081 # 监听8081端口
+            name: apigw-port
+          volumeMounts:
+            - mountPath: /src/server/*
+              name: file-volume
+      volumes:
+        - name: file-volume

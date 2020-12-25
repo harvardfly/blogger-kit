@@ -23,7 +23,5 @@ docker-release:
 	docker push $(DOCKER_TARGET_USER):release
 	docker push $(DOCKER_TARGET_USERRPC):release
 docker-push:
-#	docker push $(DOCKER_BUILDER_TARGET_USERRPC)
-#	docker push $(DOCKER_BUILDER_TARGET_USER)
 	docker push $(DOCKER_TARGET_USER):dev
 	docker push $(DOCKER_TARGET_USERRPC):dev

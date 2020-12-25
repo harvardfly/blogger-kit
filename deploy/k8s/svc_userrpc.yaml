@@ -1,0 +1,44 @@
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-userrpc
+  labels:
+    app: svc-userrpc
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    name: userrpc
+    nodePort: 18080
+  selector:
+    app: svc-userrpc
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: svc-userrpc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: svc-userrpc
+  template:
+    metadata:
+      labels:
+        app: svc-userrpc
+    spec:
+      containers:
+        - name: svc-userrpc
+          image: hub.zpf.com/web_kit_scaffold/userrpc:dev
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 8080
+            name: userrpc
+          volumeMounts:
+            - mountPath: /src/server/*
+              name: file-volume
+      volumes:
+        - name: file-volume

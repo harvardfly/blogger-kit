@@ -21,7 +21,7 @@ services:
       - db
     image: hub.zpf.com/web_kit_scaffold/user:dev
     ports:
-      - 18001:18080
+      - 18001:8080
     configs:
       - source: kit_userrpc
         target: /service/configs/userrpc.yaml

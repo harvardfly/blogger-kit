@@ -1,5 +1,5 @@
 # blogger-kit
-基于go-kit的微服务架构脚手架
+基于go-kit的微服务架构脚手架,集成zap日志库、mysql、redis、grpc、etcd等常用组件，可作为项目脚手架开箱即用；项目部署采用k8s和docker swarm
 
 ## 项目结构
 ```markdown
@@ -42,11 +42,27 @@ http/grpc传输
 zap日志库
 jwt认证中间件
 etcd服务注册发现
+docker swam
+k8s
 ```
 
 ## 系统环境要求
 ```$xslt
 golang >= 1.13
+```
+
+## 项目部署
+### docker swam方式：
+```markdown
+1. make build 生成二进制文件
+2. make docker 打包镜像并推送到docker hub
+3. 执行docker-compose.yaml 启动服务
+```
+### k8s方式：
+```markdown
+1、2步同docker swam
+3. 执行batch_deploy.sh启动pod
+执行batch_undeploy.sh可关闭pod
 ```
 
 ## golint 代码规范检查
