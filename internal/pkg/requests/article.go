@@ -3,47 +3,42 @@ package requests
 import (
 	"time"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/responses"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/responses"
 )
 
 // Article request 数据结构
 type Article struct {
-	CategoryID int    `form:"category_id" json:"category_id"`
-	Summary    string `db:"summary"`
-	Title      string `db:"title"`
-	UserName   string `form:"username" json:"username" binding:""`
+	CategoryID int    `form:"category_id" json:"category_id" validate:"required"`
+	Summary    string `form:"summary" json:"summary" validate:"required"`
+	Title      string `form:"title" json:"title" validate:"required"`
+	UserName   string `form:"username" json:"username"`
 }
 
 // ArticleInfo request 数据结构
 type ArticleInfo struct {
-	ID int `form:"id" json:"id" binding:"required,min=1"`
-}
-
-// ArticleTop TOPN 结构
-type ArticleTop struct {
-	N int `form:"n" json:"n" binding:"required"`
+	ID int `form:"id" json:"id" validate:"required"`
 }
 
 // ArticleEdit request 数据结构
 type ArticleEdit struct {
-	ID         int    `form:"id" json:"id"`
-	CategoryID int    `form:"category_id" json:"category_id"`
-	Summary    string `db:"summary"`
-	Title      string `db:"title"`
+	ID         int    `form:"id" json:"id" validate:"required"`
+	CategoryID int    `form:"category_id" json:"category_id" validate:"required"`
+	Summary    string `json:"summary" validate:"required"`
+	Title      string `json:"title" validate:"required"`
 }
 
 // ArticleCategoryEdit request 数据结构
 type ArticleCategoryEdit struct {
-	ID         int `form:"id" json:"id"`
-	CategoryID int `form:"category_id" json:"category_id"`
+	ID         int `form:"id" json:"id" validate:"required"`
+	CategoryID int `form:"category_id" json:"category_id" validate:"required"`
 }
 
 // ArticleES request 数据结构
 type ArticleES struct {
-	ID        int                `json:"id"`
-	Summary   string             `json:"summary"`
-	Title     string             `json:"title"`
-	Category  responses.Category `json:"category"`
-	CreatedAt time.Time          `json:"created_at"`
-	UpdatedAt time.Time          `json:"updated_at"`
+	ID        int                `json:"id" validate:"required"`
+	Summary   string             `json:"summary" validate:"required"`
+	Title     string             `json:"title" validate:"required"`
+	Category  responses.Category `json:"category" validate:"required"`
+	CreatedAt time.Time          `json:"created_at" validate:"required"`
+	UpdatedAt time.Time          `json:"updated_at" validate:"required"`
 }

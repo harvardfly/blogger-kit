@@ -9,8 +9,8 @@ import (
 	"errors"
 	"fmt"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/baseerror"
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/utils/middlewareutil"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/baseerror"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/utils/middlewareutil"
 
 	"github.com/go-kit/kit/endpoint"
 	"go.uber.org/zap"

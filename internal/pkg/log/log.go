@@ -3,7 +3,7 @@ package log
 import (
 	"os"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/config"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/config"
 
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"

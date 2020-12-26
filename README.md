@@ -36,6 +36,7 @@ blogger-kit #项目根路径
 目前已集成：
 gin作为路由
 config配置文件
+validator.v10通用参数验证
 MySQL数据库
 redis缓存
 http/grpc传输

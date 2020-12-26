@@ -5,15 +5,15 @@ import (
 	"flag"
 	"log"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/app/article/dao"
-	"pkg.zpf.com/golang/kit-scaffold/internal/app/article/endpoint"
-	"pkg.zpf.com/golang/kit-scaffold/internal/app/article/service"
-	"pkg.zpf.com/golang/kit-scaffold/internal/app/article/transport"
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/config"
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/databases"
-	zaplog "pkg.zpf.com/golang/kit-scaffold/internal/pkg/log"
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/redis"
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/server"
+	"pkg.zpf.com/golang/blogger-kit/internal/app/article/dao"
+	"pkg.zpf.com/golang/blogger-kit/internal/app/article/endpoint"
+	"pkg.zpf.com/golang/blogger-kit/internal/app/article/service"
+	"pkg.zpf.com/golang/blogger-kit/internal/app/article/transport"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/config"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/databases"
+	zaplog "pkg.zpf.com/golang/blogger-kit/internal/pkg/log"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/redis"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/server"
 )
 
 var configFile = flag.String("f", "article.yaml", "set config file which will loading.")

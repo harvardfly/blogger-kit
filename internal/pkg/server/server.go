@@ -9,7 +9,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/config"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/config"
 )
 
 // InitServer 初始化http server

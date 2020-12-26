@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/config"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/config"
 
 	"github.com/go-redsync/redsync"
 	"github.com/gomodule/redigo/redis"

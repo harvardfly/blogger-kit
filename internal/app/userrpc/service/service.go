@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/app/userrpc/dao"
-	userpb "pkg.zpf.com/golang/kit-scaffold/protos/user"
+	"pkg.zpf.com/golang/blogger-kit/internal/app/userrpc/dao"
+	userpb "pkg.zpf.com/golang/blogger-kit/protos/user"
 
 	"go.uber.org/zap"
 )

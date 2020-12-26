@@ -4,10 +4,10 @@ import (
 	"context"
 
 	"github.com/gin-gonic/gin"
-	"pkg.zpf.com/golang/kit-scaffold/internal/app/user/endpoint"
-	"pkg.zpf.com/golang/kit-scaffold/internal/app/user/utils"
-	httpware "pkg.zpf.com/golang/kit-scaffold/internal/pkg/middlewares/http"
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/utils/httputil"
+	"pkg.zpf.com/golang/blogger-kit/internal/app/user/endpoint"
+	"pkg.zpf.com/golang/blogger-kit/internal/app/user/utils"
+	httpware "pkg.zpf.com/golang/blogger-kit/internal/pkg/middlewares/http"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/utils/httputil"
 
 	kithttp "github.com/go-kit/kit/transport/http"
 	"go.uber.org/zap"

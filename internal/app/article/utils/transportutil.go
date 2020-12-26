@@ -9,7 +9,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/requests"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/baseerror"
+
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/requests"
 )
 
 var (
@@ -29,7 +31,11 @@ func DecodeArticleRequest(_ context.Context, r *http.Request) (interface{}, erro
 		log.Printf("Unmarshal err, %v\n", err)
 		return nil, err
 	}
-
+	// 验证必填参数
+	err = baseerror.ParamError(reg)
+	if err != nil {
+		return nil, err
+	}
 	return &requests.Article{
 		CategoryID: reg.CategoryID,
 		Summary:    reg.Summary,

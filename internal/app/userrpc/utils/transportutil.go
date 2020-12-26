@@ -3,7 +3,7 @@ package utils
 import (
 	"context"
 
-	userpb "pkg.zpf.com/golang/kit-scaffold/protos/user"
+	userpb "pkg.zpf.com/golang/blogger-kit/protos/user"
 )
 
 // DecodeFindByEmailRequest  FindByEmail参数验证

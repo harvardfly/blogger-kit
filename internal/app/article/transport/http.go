@@ -5,11 +5,11 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/app/article/endpoint"
-	"pkg.zpf.com/golang/kit-scaffold/internal/app/article/utils"
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/middlewares/auth"
-	httpware "pkg.zpf.com/golang/kit-scaffold/internal/pkg/middlewares/http"
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/utils/httputil"
+	"pkg.zpf.com/golang/blogger-kit/internal/app/article/endpoint"
+	"pkg.zpf.com/golang/blogger-kit/internal/app/article/utils"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/middlewares/auth"
+	httpware "pkg.zpf.com/golang/blogger-kit/internal/pkg/middlewares/http"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/utils/httputil"
 
 	"go.uber.org/zap"
 

@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/config"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/config"
 
 	// mysql driver
 	_ "github.com/go-sql-driver/mysql"

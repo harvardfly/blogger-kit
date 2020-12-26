@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/config"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/config"
 
 	"go.uber.org/zap"
 

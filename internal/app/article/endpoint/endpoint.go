@@ -3,8 +3,8 @@ package endpoint
 import (
 	"context"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/app/article/service"
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/requests"
+	"pkg.zpf.com/golang/blogger-kit/internal/app/article/service"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/requests"
 
 	"github.com/go-kit/kit/endpoint"
 )

@@ -10,8 +10,8 @@ import (
 	ginZap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/baseerror"
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/utils/middlewareutil"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/baseerror"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/utils/middlewareutil"
 
 	kithttp "github.com/go-kit/kit/transport/http"
 	"go.uber.org/zap"

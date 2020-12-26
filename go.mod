@@ -1,4 +1,4 @@
-module pkg.zpf.com/golang/kit-scaffold
+module pkg.zpf.com/golang/blogger-kit
 
 go 1.13
 
@@ -9,6 +9,9 @@ require (
 	github.com/gin-gonic/gin v1.6.3
 	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8 // indirect
 	github.com/go-kit/kit v0.10.0
+	github.com/go-playground/locales v0.13.0
+	github.com/go-playground/universal-translator v0.17.0
+	github.com/go-playground/validator/v10 v10.2.0
 	github.com/go-redsync/redsync v1.4.2
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/golang/protobuf v1.4.3

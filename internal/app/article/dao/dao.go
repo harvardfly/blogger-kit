@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"time"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/databases"
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/models"
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/requests"
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/responses"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/databases"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/models"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/requests"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/responses"
 
 	"github.com/jinzhu/gorm"
 	"github.com/opentracing/opentracing-go"

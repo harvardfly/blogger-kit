@@ -9,7 +9,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"pkg.zpf.com/golang/kit-scaffold/internal/pkg/requests"
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/baseerror"
+
+	"pkg.zpf.com/golang/blogger-kit/internal/pkg/requests"
 )
 
 var (
@@ -29,7 +31,12 @@ func DecodeRegisterRequest(_ context.Context, r *http.Request) (interface{}, err
 		log.Printf("Unmarshal err, %v\n", err)
 		return nil, err
 	}
-
+	// 验证必填参数
+	err = baseerror.ParamError(reg)
+	if err != nil {
+		return nil, err
+	}
+	// 自定义业务验证
 	if reg.Username == "" || reg.Password == "" || reg.Email == "" {
 		return nil, ErrorBadRequest
 	}
@@ -51,6 +58,11 @@ func DecodeLoginRequest(_ context.Context, r *http.Request) (interface{}, error)
 	var reg requests.LoginRequest
 	if err = json.Unmarshal(body, &reg); err != nil {
 		log.Printf("Unmarshal err, %v\n", err)
+		return nil, err
+	}
+	// 验证必填参数
+	err = baseerror.ParamError(reg)
+	if err != nil {
 		return nil, err
 	}
 	if reg.Email == "" || reg.Password == "" {
